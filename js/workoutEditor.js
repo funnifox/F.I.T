@@ -2,6 +2,8 @@ document.getElementById("addWorkout").addEventListener("click", addWorkout);
 document.getElementById("addRest").addEventListener("click", addRest);
 
 let i = 0
+
+// card population
 function addWorkout() {
     const workoutList = document.getElementById("workoutList");
 
@@ -9,18 +11,21 @@ function addWorkout() {
     workoutCard.classList.add("unit");
 
     workoutCard.innerHTML = `
-    <div class="container${i}" id="collaspe${i}">
-        <bigNumb>${i}</bigNumb>
+    <div class="container${i} text-light" id="collaspe${i}">
         <input type="text" class="h1 text-light border-0 exercise-name" placeholder="Exercise Name (reps)" style="background:transparent;width:100%;">
         <br><br>
-        <input type="text" style="background:transparent;width:30%;" class="h3 text-light border-0 exercise-time" placeholder="mm:ss" minlength="5" oninput="formatTimeInput(this)">
+
+        
+        <input type="number" class="h3 text-light border-0 exercise-time" style="background:transparent;width:15%;" placeholder="0" onchange="totalTime()"> S
         <br><br>
+
+
         <button class="btn bg-danger text-dark deleteWorkout" style="width:75%">Delete</button>
         <button class="btn bg-secondary-subtle text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
         <br><br>
     </div>
     <div class="collasped" id="collasped${i}">
-        <button class="btn btn-outline-light text-light collapsed" onclick="collasped(${i})" style="width:100%;">${i}</button>
+        <button class="btn btn-outline-light text-light collapsed" onclick="collasped(${i})" style="width:100%;">⊹</button>
     </div>
     `;
 
@@ -30,7 +35,7 @@ function addWorkout() {
     const collapsedButton = workoutCard.querySelector(".collapsed");
 
     exerciseInput.addEventListener("input", function () {
-        collapsedButton.textContent = this.value.trim();
+        collapsedButton.textContent = this.value
     });
     
 
@@ -38,10 +43,9 @@ function addWorkout() {
 
     workoutCard.querySelector(".deleteWorkout").addEventListener("click", () => {
         workoutCard.remove();
+        totalTime();
     });
 }
-
-
 function addRest() {
     const workoutList = document.getElementById("workoutList");
 
@@ -49,10 +53,14 @@ function addRest() {
     workoutCard.classList.add("unit");
 
     workoutCard.innerHTML = `
-    <div class="container${i} text-center" id="collaspe${i}">
-    <p style="color:#ffffff;font-size:400%;">REST</p>
-        <input type="text" style="background:transparent;width:40%;font-size:200%;" class="rest text-light border-0" placeholder="mm:ss" maxlength="5" oninput="formatTimeInput(this)">
+    <div class="container${i} text-light" id="collaspe${i}">
+    <p class="text-center" style="color:#ffffff;font-size:250%;">REST</p>
+
+
+        <input type="number" class="h3 text-light border-0 rest-time" style="background:transparent;width:15%;" placeholder="0" min="0" onchange="totalTime()"> S
         <br><br>
+
+
         <button class="btn bg-danger text-dark deleteWorkout" style="width:75%">Delete</button>
         <button class="btn bg-secondary-subtle text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
         <br><br>
@@ -63,11 +71,11 @@ function addRest() {
     `;
     workoutList.appendChild(workoutCard);
 
-    const restInput = workoutCard.querySelector(".rest");
+    const restInput = workoutCard.querySelector(".rest-time");
     const collapsedButton = workoutCard.querySelector(".collapsed");
 
     restInput.addEventListener("input", function () {
-        collapsedButton.textContent = `⊘ ${this.value} ⊘`
+        collapsedButton.textContent = `⊘ ${this.value}s ⊘`
     });
 
     i++
@@ -75,10 +83,11 @@ function addRest() {
 
     workoutCard.querySelector(".deleteWorkout").addEventListener("click", () => {
         workoutCard.remove();
+        totalTime();
     });
 }
 
-
+// collaspe and expand cards
 function collaspe(i){
     document.getElementById(`collaspe${i}`).style.display = "none";
     document.getElementById(`collasped${i}`).style.display = "block";
@@ -88,29 +97,75 @@ function collasped(i){
     document.getElementById(`collasped${i}`).style.display = "none";
 }
 
+// time display
+function totalTime() {
+    let totalWorkoutTime = 0;
+    let totalWorkTime = 0;
+    let totalRestTime = 0;
 
-function formatTimeInput(input) {
-    let value = input.value.replace(/[^0-9:]/g, '');
-    
-    if (value.length > 5) {
-        value = value.slice(0, 5);
+    const workoutTime = document.querySelectorAll(".exercise-time");
+    const restTime = document.querySelectorAll(".rest-time");
+
+    workoutTime.forEach(input => {
+        totalWorkTime += Number(input.value) || 0;
+    });
+
+    restTime.forEach(input => {
+        totalRestTime += Number(input.value) || 0;
+    });
+
+    totalWorkoutTime = totalRestTime + totalWorkTime
+
+    function timeFormat(i){
+        let minutes = Math.floor(i / 60);
+        let seconds = i % 60;
+
+        return `[ ${minutes}:${seconds < 10 ? "0" : ""}${seconds}s ]`
     }
     
-    let parts = value.split(':');
-    let minutes = parts[0] ? parts[0].slice(0, 2) : '';
-    let seconds = parts[1] ? parts[1].slice(0, 2) : '';
     
-    if (seconds && parseInt(seconds) > 59) {
-        seconds = '59';
+
+    function compare(restTime, totalTime) {
+        const progressBarText = document.getElementById("conparetimeMove");
+    
+        // Avoid division by zero
+        if (totalTime > 0) {
+            const ratio = restTime / totalTime;
+            const totalBars = 15;
+            const filledBars = Math.floor(ratio * totalBars);
+    
+            let progressBarRed = '';
+            let progressBarGrey = '';
+    
+            // Add hashes for the filled portion
+            for (let i = 0; i < filledBars; i++) {
+                progressBarRed += '#';
+            }
+    
+            // Add underscores for the remaining portion
+            for (let i = filledBars; i < totalBars; i++) {
+                progressBarGrey += '_ ';
+            }
+    
+        document.getElementById("conparetimeRest").innerHTML = progressBarRed;
+        document.getElementById("conparetimeMove").innerHTML = progressBarGrey;
+        }
     }
-    
-    if (minutes.length === 2 && !value.includes(':')) {
-        value = minutes + ':';
-    } else if (seconds) {
-        value = minutes + ':' + seconds;
-    } else {
-        value = minutes;
-    }
-    
-    input.value = value;
+    compare(totalRestTime, totalWorkoutTime)
+
+    document.getElementById("totalTime").innerHTML = timeFormat(totalWorkoutTime);
+    document.getElementById("restime").innerHTML = timeFormat(totalRestTime);
+    document.getElementById("workoutime").innerHTML = timeFormat(totalWorkTime);
+}
+
+
+
+// overlay
+function openPopup(){
+    document.getElementById(`overlay`).style.display = "block";
+    document.getElementById(`popup`).style.display = "block";
+}
+function closePopup(){
+    document.getElementById(`overlay`).style.display = "none";
+    document.getElementById(`popup`).style.display = "none";
 }

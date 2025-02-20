@@ -16,15 +16,56 @@
 <body>
 
     <br>
-    <input type="text" class="text-light border-0" placeholder="Workout Name" style="background:transparent;width:100%;font-size:250%;">
+    <!-- header -->
+    <input type="text" class="text-light border-0" placeholder="Workout Name" style="background:transparent;width:100%;font-size:5vh;">
     <br><br>
+
+
+    <!-- total workout time -->
+    <button id="workoutTime" class="btn w-25 text-light btn-outline-light float-end" onclick="openPopup()">◷</button>
+    <br><br>
+    
+    <!-- popup -->
+    <div id="overlay" onclick="closePopup()"></div>
+    <div id="popup" class="text-center text-white-50">
+        <h1 class="text-danger">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
+        <br>
+        <h3 class="text-white-50" style="font-size:3vh;">Total Time</h1>
+        <h1 id="totalTime" class="text-white" style="font-size:3.5vh;">[ 0:00s ]</h1>
+        <br>
+
+        <h3 style="font-size:10vh;position:fixed;width:100%;z-index:-10;opacity:50;" class="text-white-50">REST</h3>
+        <h1 class="text-black text-opacity-75 bg-danger bg-opacity-50" style="font-size:3.5vh;">_______<strong><br><a id="restime">[ 0:00s ]</a><br>‾‾‾‾‾‾‾‾</strong></h1>
+        <h3 style="font-size:10vh;position:absolute;width:100%;z-index:-10;" class="text-white-50">MOVE</h3>
+        <h1 class="text-black text-opacity-75 bg-secondary bg-opacity-50" style="font-size:3.3vh;">_______<strong><br><a id="workoutime">[ 0:00s ]</a><br>‾‾‾‾‾‾‾‾</strong></h1>
+        <br>
+
+        <div style="font-size: 2vh;">RATIO:[ <x id="conparetimeRest" class="bg-danger text-dark"> </x><x id="conparetimeMove" class="border-danger-subtle text-white">.............................</x> ]</div>
+
+
+        <br>
+        <br>
+        <button class="btn w-50 text-light bg-danger" onclick="closePopup()" style="font-size: 2vh;">close</button>
+
+        <h1 class="text-danger" style="position:fixed;bottom:0;width:100%;">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
+    </div>
+
+
+    <div class="scrollArea">
+
+    <!-- populate on user input -->
     <div id="workoutList"></div>
 
+
+
+    <!-- add buttons -->
     <div class="text-center">
     <button id="addWorkout" class="btn btn-dark w-25 align-items-center">+</button>
     <button id="addRest" class="btn btn-secondary w-15 align-items-center">⊘</button>
     </div>
 
+
+    </div>
 
 
 
