@@ -158,22 +158,40 @@ function totalTime() {
     document.getElementById("workoutime").innerHTML = timeFormat(totalWorkTime);
 }
 
+// generate token
 function generateToken() {
     let workout = ""; 
 
     const data = document.querySelectorAll(".data"); 
     const title = document.querySelector(".title"); 
     
-    workout += `title;${title.value};`
-    data.forEach(input => {
-        if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
-            workout += `${input.value};`;  
-        } else {
-            workout += `${input.innerText};`;  
+    if (title.value == ''){
+        window.alert("empty parameter found. Please enter a workout name.")
+        return
+    }else{
+        workout += `title;${title.value};`
+
+        
+        for (let i = 0; i < data.length; i++) {
+            let input = data[i];
+    
+            if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
+                if (input.value === '') {
+                    window.alert("A workout or REST card is missing a parameter. Please fill it in.");
+                    return;  // Exits the function immediately
+                } else {
+                    workout += `${input.value};`;  
+                }
+            } else {
+                workout += `${input.innerText};`;  
+            }
         }
-    });
+    
+    }
+    
 
     console.log(workout); 
+    openTokenGeneration()
 }
 
 
