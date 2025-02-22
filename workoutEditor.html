@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Electrolize&display=swap" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -17,14 +17,18 @@
 
     <br>
     <!-- header -->
-    <input type="text" class="text-light border-0" placeholder="Workout Name" style="background:transparent;width:100%;font-size:5vh;">
+    <input type="text" class="title text-light border-0" placeholder="Workout Name" style="background:transparent;width:100%;font-size:5vh;">
     <br><br>
 
 
     <!-- total workout time -->
     <button id="workoutTime" class="btn w-25 text-light btn-outline-light float-end" onclick="openPopup()">◷</button>
+
+    <!-- generate token -->
+    <button class="btn text-dark bg-warning text-center"  onclick="generateToken();openTokenGeneration()">Generate token</button>
     <br><br>
     
+
     <!-- popup -->
     <div id="overlay" onclick="closePopup()"></div>
     <div id="popup" class="text-center text-white-50">
@@ -50,29 +54,31 @@
         <h1 class="text-danger" style="position:fixed;bottom:0;width:100%;">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
     </div>
 
+    <!-- tokenGeneration -->
+    <div id="tokenGenerationPopup" class="text-center text-white-50">
+        <h1 class="text-warning">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
+        <br><br><br><br>
+        <h3 class="text-white-50" style="font-size:4vh;">Token Generated</h1>
+        <br><br><br><br><br><br>
+        <button class="btn w-50 text-dark bg-warning" onclick="closePopup()" style="font-size: 2vh;">close</button>
 
+        <h1 class="text-warning" style="position:fixed;bottom:0;width:100%;">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
+    </div>
+
+
+    <!-- cards -->
     <div class="scrollArea">
 
-    <!-- populate on user input -->
-    <div id="workoutList"></div>
+        <!-- populate on user input -->
+        <div id="workoutList"></div>
 
-
-
-    <!-- add buttons -->
-    <div class="text-center">
-    <button id="addWorkout" class="btn btn-dark w-25 align-items-center">+</button>
-    <button id="addRest" class="btn btn-secondary w-15 align-items-center">⊘</button>
-    </div>
-
+        <!-- add buttons -->
+        <div class="text-center">
+            <button id="addWorkout" class="btn btn-dark w-25 align-items-center">+</button>
+            <button id="addRest" class="btn btn-secondary w-15 align-items-center">⊘</button>
+        </div>
 
     </div>
-
-
-
-
-
-
-
 
 
 

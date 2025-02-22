@@ -11,12 +11,12 @@ function addWorkout() {
     workoutCard.classList.add("unit");
 
     workoutCard.innerHTML = `
-    <div class="container${i} text-light" id="collaspe${i}">
-        <input type="text" class="h1 text-light border-0 exercise-name" placeholder="Exercise Name (reps)" style="background:transparent;width:100%;">
+    <div class="text-light" id="collaspe${i}">
+        <input type="text" class="data h1 text-light border-0 exercise-name" placeholder="Exercise Name (reps)" style="background:transparent;width:100%;">
         <br><br>
 
         
-        <input type="number" class="h3 text-light border-0 exercise-time" style="background:transparent;width:15%;" placeholder="0" onchange="totalTime()"> S
+        <input type="number" class="data h3 text-light border-0 exercise-time" style="background:transparent;width:15%;" placeholder="0" onchange="totalTime()"> S
         <br><br>
 
 
@@ -53,11 +53,11 @@ function addRest() {
     workoutCard.classList.add("unit");
 
     workoutCard.innerHTML = `
-    <div class="container${i} text-light" id="collaspe${i}">
-    <p class="text-center" style="color:#ffffff;font-size:250%;">REST</p>
+    <div class="text-light" id="collaspe${i}">
+    <p class="data text-center" style="color:#ffffff;font-size:250%;">REST</p>
 
 
-        <input type="number" class="h3 text-light border-0 rest-time" style="background:transparent;width:15%;" placeholder="0" min="0" onchange="totalTime()"> S
+        <input type="number" class="data h3 text-light border-0 rest-time" style="background:transparent;width:15%;" placeholder="0" min="0" onchange="totalTime()"> S
         <br><br>
 
 
@@ -158,9 +158,26 @@ function totalTime() {
     document.getElementById("workoutime").innerHTML = timeFormat(totalWorkTime);
 }
 
+function generateToken() {
+    let workout = ""; 
+
+    const data = document.querySelectorAll(".data"); 
+    const title = document.querySelector(".title"); 
+    
+    workout += `title;${title.value};`
+    data.forEach(input => {
+        if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
+            workout += `${input.value};`;  
+        } else {
+            workout += `${input.innerText};`;  
+        }
+    });
+
+    console.log(workout); 
+}
 
 
-// overlay
+// popup's
 function openPopup(){
     document.getElementById(`overlay`).style.display = "block";
     document.getElementById(`popup`).style.display = "block";
@@ -168,4 +185,11 @@ function openPopup(){
 function closePopup(){
     document.getElementById(`overlay`).style.display = "none";
     document.getElementById(`popup`).style.display = "none";
+    document.getElementById(`tokenGenerationPopup`).style.display = "none";
+}
+
+
+function openTokenGeneration(){
+    document.getElementById(`overlay`).style.display = "block";
+    document.getElementById(`tokenGenerationPopup`).style.display = "block";
 }

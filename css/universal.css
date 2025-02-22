@@ -1,14 +1,15 @@
 body{
     background-color: #151515;
-    font-family: aldrich, monospace;
+    font-family: "Electrolize", monospace;
     padding: 5%;
 }
 
-.aldrich-regular {
-    font-family: "Aldrich", monospace;
+.electrolize-regular {
+    font-family: "Electrolize", serif;
     font-weight: 500;
     font-style: normal;
-  }
+}
+  
   
 .unit{
     margin: 2%;
@@ -33,7 +34,7 @@ body{
     display: none;
 }
 
-#popup{
+#popup,#tokenGenerationPopup{
     background-color: #232323;
     display: none;
     width: 80%;
