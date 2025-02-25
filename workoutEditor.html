@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body class="darker">
 
     <br>
     <!-- header -->
@@ -22,45 +22,46 @@
 
 
     <!-- total workout time -->
-    <button id="workoutTime" class="btn w-25 text-light btn-outline-light float-end" onclick="openPopup()">◷</button>
+    <button id="workoutTime" class="btn dark w-25 text-light float-end" onclick="openPopup()">◷</button>
 
     <!-- generate token -->
-    <button class="btn text-dark bg-warning text-center"  onclick="generateToken()">Generate token</button>
+    <button class="btn text-dark warning"  onclick="generateToken()">Generate token</button>
     <br><br>
     
 
     <!-- popup -->
     <div id="overlay" onclick="closePopup()"></div>
-    <div id="popup" class="text-center text-white-50">
+    <div id="popup" class="popup dark text-center text-white-50">
         <h1 class="text-danger">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
         <br>
         <h3 class="text-white-50" style="font-size:3vh;">Total Time</h1>
         <h1 id="totalTime" class="text-white" style="font-size:3.5vh;">[ 0:00s ]</h1>
         <br>
 
-        <h3 style="font-size:10vh;position:fixed;width:100%;z-index:-10;opacity:50;" class="text-white-50">REST</h3>
-        <h1 class="text-black text-opacity-75 bg-danger bg-opacity-50" style="font-size:3.5vh;">_______<strong><br><a id="restime">[ 0:00s ]</a><br>‾‾‾‾‾‾‾‾</strong></h1>
-        <h3 style="font-size:10vh;position:absolute;width:100%;z-index:-10;" class="text-white-50">MOVE</h3>
-        <h1 class="text-black text-opacity-75 bg-secondary bg-opacity-50" style="font-size:3.3vh;">_______<strong><br><a id="workoutime">[ 0:00s ]</a><br>‾‾‾‾‾‾‾‾</strong></h1>
-        <br>
+        <h3 style="font-size:10vh;position:fixed;width:100%;z-index:-10;" class="text-white-50 danger opacity-75">REST</h3>
+        <h1 class="text-black" style="font-size:3.5vh;z-index:10;"> <strong><br><a id="restime">[ 0:00s ]</a><br> </strong></h1>
+        <br><br>
+        <h3 style="font-size:10vh;position:absolute;width:100%;z-index:-10;" class="text-white-50 secondary opacity-75">MOVE</h3>
+        <h1 class="text-black" style="font-size:3.3vh;z-index:10;"> <strong><br><a id="workoutime">[ 0:00s ]</a><br> </strong></h1>
+        <br><br>
 
         <div style="font-size: 2vh;">RATIO:[ <x id="conparetimeRest" class="bg-danger text-dark"> </x><x id="conparetimeMove" class="border-danger-subtle text-white">.............................</x> ]</div>
 
 
         <br>
         <br>
-        <button class="btn w-50 text-light bg-danger" onclick="closePopup()" style="font-size: 2vh;">close</button>
+        <button class="btn w-50 text-light danger" onclick="closePopup()" style="font-size: 2vh;">close</button>
 
         <h1 class="text-danger" style="position:fixed;bottom:0;width:100%;">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
     </div>
 
     <!-- tokenGeneration -->
-    <div id="tokenGenerationPopup" class="text-center text-white-50">
+    <div id="tokenGenerationPopup" class=" popup dark text-center text-white-50">
         <h1 class="text-warning">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
         <br><br><br><br>
         <h3 class="text-white-50" style="font-size:4vh;">Token Generated</h1>
         <br><br><br><br><br><br>
-        <button class="btn w-50 text-dark bg-warning" onclick="closePopup()" style="font-size: 2vh;">close</button>
+        <button class="btn w-50 text-dark warning" onclick="closePopup()" style="font-size: 2vh;">close</button>
 
         <h1 class="text-warning" style="position:fixed;bottom:0;width:100%;">¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦</h1>
     </div>
@@ -74,8 +75,8 @@
 
         <!-- add buttons -->
         <div class="text-center">
-            <button id="addWorkout" class="btn btn-dark w-25 align-items-center">+</button>
-            <button id="addRest" class="btn btn-secondary w-15 align-items-center">⊘</button>
+            <button id="addWorkout" class="btn btn-dark dark text-light w-25 align-items-center">+</button>
+            <button id="addRest" class="btn btn-light text-dark light w-15 align-items-center">⊘</button>
         </div>
 
     </div>

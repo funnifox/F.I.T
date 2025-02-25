@@ -9,6 +9,7 @@ function addWorkout() {
 
     const workoutCard = document.createElement("div");
     workoutCard.classList.add("unit");
+    workoutCard.classList.add("dark");
 
     workoutCard.innerHTML = `
     <div class="text-light" id="collaspe${i}">
@@ -20,8 +21,8 @@ function addWorkout() {
         <br><br>
 
 
-        <button class="btn bg-danger text-dark deleteWorkout" style="width:75%">Delete</button>
-        <button class="btn bg-secondary-subtle text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
+        <button class="btn danger text-dark deleteWorkout" style="width:75%">Delete</button>
+        <button class="btn light text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
         <br><br>
     </div>
     <div class="collasped" id="collasped${i}">
@@ -51,6 +52,7 @@ function addRest() {
 
     const workoutCard = document.createElement("div");
     workoutCard.classList.add("unit");
+    workoutCard.classList.add("dark");
 
     workoutCard.innerHTML = `
     <div class="text-light" id="collaspe${i}">
@@ -61,12 +63,12 @@ function addRest() {
         <br><br>
 
 
-        <button class="btn bg-danger text-dark deleteWorkout" style="width:75%">Delete</button>
-        <button class="btn bg-secondary-subtle text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
+        <button class="btn danger text-dark deleteWorkout" style="width:75%">Delete</button>
+        <button class="btn light text-dark" onclick="collaspe(${i})" style="width:20%">↥</button>
         <br><br>
     </div>
     <div class="collasped" id="collasped${i}">
-        <button class="btn btn-outline-light bg-danger text-light collapsed" onclick="collasped(${i})" style="width:100%;">⊘</button>
+        <button class="btn btn-outline-light danger text-light collapsed" onclick="collasped(${i})" style="width:100%;">⊘</button>
     </div>
     `;
     workoutList.appendChild(workoutCard);

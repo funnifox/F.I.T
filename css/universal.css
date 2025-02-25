@@ -1,5 +1,37 @@
-body{
+/* colors */
+.light{
+    background-color: #cfcfcf;
+}
+.secondary{
+    background-color: #767676;
+    
+}
+.dark{
+    background-color: #232323;
+}
+.darker{
     background-color: #151515;
+}
+.warning{
+    background-color: #fdba00;
+}
+.danger{
+    background-color: #d73737;
+}
+.btn{
+    border-radius: 0.5vh;
+}
+
+
+
+
+
+
+
+
+
+
+body{
     font-family: "Electrolize", monospace;
     padding: 5%;
 }
@@ -8,13 +40,10 @@ body{
     font-family: "Electrolize", serif;
     font-weight: 500;
     font-style: normal;
-}
-  
-  
+}  
 .unit{
     margin: 2%;
     padding: 5%;
-    background-color: #232323;
     border-radius: 0.2em;
 }
 .collasped{
@@ -33,16 +62,13 @@ body{
     background-color: rgba(143, 143, 143, 0.5); 
     display: none;
 }
-
-#popup,#tokenGenerationPopup{
-    background-color: #232323;
+.popup{
     display: none;
     width: 80%;
     height: 80%;
     position: fixed;
     border-radius: 0.2em;
     z-index: inherit;
-    border-color: #515151;
     top: 50%;
     left: 50%; 
     transform: translate(-50%, -50%); 
