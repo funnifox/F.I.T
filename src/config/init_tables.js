@@ -4,7 +4,7 @@ const SQLSTATEMENT = `
     DROP TABLE IF EXISTS users;
 
     CREATE TABLE users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
         username TEXT NOT NULL,
         email TEXT NOT NULL,
         password TEXT NOT NULL,

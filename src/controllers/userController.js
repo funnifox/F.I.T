@@ -8,17 +8,17 @@ module.exports.theEmptyVoid = (req, res, next) => {
 };
 
 
-
-
-
-
-
-
-
 // USER:1
-module.exports.createNewUser = (req, res, next) =>
-{
-    if(req.body.username == undefined)
+// create an account
+module.exports.createNewUser = (req, res, next) =>{
+    console.log("running createNewUser")
+    if(req.body.username == (undefined||null)
+     ||req.body.username.trim() === ""
+     ||req.body.email == (undefined||null)
+     ||req.body.email.trim() === ""
+     ||req.body.password == (undefined||null)
+     ||req.body.password.trim() === ""
+    )
     {
         res.status(400).send("Error: invalid request body");
         return;
@@ -35,15 +35,86 @@ module.exports.createNewUser = (req, res, next) =>
             console.error("Error createNewUser:", error);
             res.status(500).json(error);
         } else {
-            res.status(201).json({"message":"Please login using new the credentials"});
+            res.status(201).json({message:"Please login using new the credentials"});
         }
     }
 
-    console.log("USER cont:",1)
+    console.log("USER",1,"cont:createNewUser")
     model.insertSingle(data, callback);
 }
-module.exports.dupeCheckerinator = (req, res, next) => 
-{
+
+
+// USER:2
+// delete an account
+module.exports.deleteUserById = (req, res, next) =>{
+    console.log("running deleteUserById")
+    const data = {
+        user_id: req.params.user_id
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error deleteUserById:", error);
+            res.status(500).json(error);
+        } else {
+        switch(true) {
+            case (results.affectedRows == 0):
+                console.log(`Error: user not found`)
+                res.status(404).json({message: "User not found"});
+            break;
+            default:
+                console.log("USER",2,"cont:deleteUserById")
+                res.status(204).send(); // 204 No Content      
+            }
+        }
+    }
+
+    model.deleteById(data, callback);
+};
+
+
+// USER:3
+// get an account's info
+module.exports.readUserById = (req, res, next) =>{
+    console.log("running readUserById")
+    if(req.params.user_id == (undefined||null))
+       {
+           res.status(400).send("Error: invalid request params");
+           return;
+       }
+    const data = {
+        user_id: req.params.user_id
+    }
+
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error readUserById:", error);
+            res.status(500).json(error);
+        } else {
+        switch(true) {
+            case (results.affectedRows == 0):
+                console.log(`Error: user not found`)
+                res.status(404).json({message: "User not found"});
+            break;
+            default:
+                console.log("USER",3,"cont:readUserById")
+                res.status(200).send(results); // 204 No Content      
+            }
+        }
+    }
+    model.selectUserById(data, callback);
+}
+
+
+
+
+
+
+
+
+
+// checks
+module.exports.dupeCheckerinator = (req, res, next) => {
     console.log(`running dupecheckinator`)
     if(req.body.username == undefined|| req.body.username.trim() === "")
         {
@@ -57,21 +128,63 @@ module.exports.dupeCheckerinator = (req, res, next) =>
 
     const callback = (error, results) => {
         if (error) {
-            console.error("Error: dupeCheckerinator is not working for some reason", error);
+            console.error("Error: dupeCheckerinator", error);
             res.status(500).json(error);
             return;
-        }
-        if (results[0].count > 0) {
-            res.status(409).send("Error: username is taken");
         } else {
-            console.log(`no dupes found`)
-            next(); 
+        switch(true) {
+            case (results[0].count > 0):
+                console.log(`Error: username is taken`)
+                res.status(409).send("Error: username is taken");
+                break;
+            default:
+                console.log(`no dupes found`)
+                next();
+            }
         }
     };
 
     model.dupeCheckerinator(data, callback);
 };
+module.exports.auth = (req, res, next) =>{
+    console.log("running auth")
+    if(req.params.password == (undefined||null)
+     ||req.params.password.trim() === ""
+     ||req.params.user_id == (undefined||null)
+    )
+    {
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
 
 
+    const data = {
+        user_id: req.params.user_id,
+        password: req.params.password
+    }
 
+    const callback = (error, results, fields) => {
+        if (error) {
+            console.error("Error auth:", error);
+            res.status(500).json(error);
+        } else {
+        switch(true) {
+            case (results[0][0].count == 0):
+                res.status(404).send(`user_id not found`)
+                break;
+            case (error):
+                console.error("Error: auth", error);
+                res.status(500).json(error);
+                break;
+            case (results[1][0].count == 0):
+                res.status(404).send(`incorrect password. please try again`)
+                break;
+            default:
+                console.log("auth passed")
+                next();
+            }
+        }
+    }
 
+    model.auth(data, callback);
+};
