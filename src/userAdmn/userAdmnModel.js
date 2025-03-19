@@ -7,7 +7,7 @@ const pool = require('../services/db');
 module.exports.selectAll = (callback) =>
 {
     const SQLSTATEMENT = `
-        SELECT * FROM User;
+        SELECT * FROM users;
     `;
     pool.query(SQLSTATEMENT, callback);
 }
@@ -18,7 +18,7 @@ module.exports.selectAll = (callback) =>
 module.exports.checkUsernameExist = (data, callback) =>
 {
     const SQLSTATEMENT = `
-        SELECT * FROM User
+        SELECT * FROM users
         WHERE username = ?;
     `;
 
@@ -34,7 +34,7 @@ module.exports.checkUsernameExist = (data, callback) =>
 module.exports.checkUsernameOrEmailExist = (data, callback) =>
 {
     const SQLSTATEMENT = `
-        SELECT COUNT(*) AS count FROM User
+        SELECT COUNT(*) AS count FROM users
         WHERE username = ? OR email = ?;
     `;
 
@@ -48,7 +48,7 @@ module.exports.checkUsernameOrEmailExist = (data, callback) =>
 module.exports.insertNewUser = (data, callback) =>
 {
     const SQLSTATEMENT = `
-        INSERT INTO User (username, email, password)
+        INSERT INTO users (username, email, password)
         VALUES (?, ?, ?)
     `;
 
