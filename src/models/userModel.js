@@ -59,7 +59,7 @@ module.exports.dupeCheckerinator = (data, callback)=> {
     console.log(`checking for dupes`)
     pool.query(SQLSTATEMENT, VALUES, callback);
 }   
-module.exports.auth = (data, callback) =>{
+module.exports.pswdAuth = (data, callback) =>{
     const SQLSTATEMENT = `
     SELECT COUNT(*) AS count FROM users WHERE user_id = ?;
     SELECT COUNT(*) AS count FROM users WHERE user_id = ? AND password = ?;

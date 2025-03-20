@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-// user 
+// users
 const userRoutes = require('./userRoutes');
 router.use("/users", userRoutes);
+
+// groups 
+const groupRoutes = require('./groupRoutes');
+router.use("/groups", groupRoutes);
 
 
 

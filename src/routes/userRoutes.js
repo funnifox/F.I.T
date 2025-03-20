@@ -9,7 +9,7 @@ router.post('/', controller.theEmptyVoid, controller.dupeCheckerinator, controll
 
 // USER:2
 // delete an account
-router.delete('/:user_id/:password', controller.theEmptyVoid, controller.auth, controller.deleteUserById);
+router.delete('/:user_id/:password', controller.theEmptyVoid, controller.pswdAuth, controller.deleteUserById);
 
 // USER:3
 // get an account's info

@@ -11,7 +11,7 @@ module.exports.theEmptyVoid = (req, res, next) => {
 // USER:1
 // create an account
 module.exports.createNewUser = (req, res, next) =>{
-    console.log("running createNewUser")
+    console.log("USER",1,"cont:createNewUser")
     if(req.body.username == (undefined||null)
      ||req.body.username.trim() === ""
      ||req.body.email == (undefined||null)
@@ -39,7 +39,6 @@ module.exports.createNewUser = (req, res, next) =>{
         }
     }
 
-    console.log("USER",1,"cont:createNewUser")
     model.insertSingle(data, callback);
 }
 
@@ -47,7 +46,7 @@ module.exports.createNewUser = (req, res, next) =>{
 // USER:2
 // delete an account
 module.exports.deleteUserById = (req, res, next) =>{
-    console.log("running deleteUserById")
+    console.log("USER",2,"cont:deleteUserById")
     const data = {
         user_id: req.params.user_id
     }
@@ -57,15 +56,7 @@ module.exports.deleteUserById = (req, res, next) =>{
             console.error("Error deleteUserById:", error);
             res.status(500).json(error);
         } else {
-        switch(true) {
-            case (results.affectedRows == 0):
-                console.log(`Error: user not found`)
-                res.status(404).json({message: "User not found"});
-            break;
-            default:
-                console.log("USER",2,"cont:deleteUserById")
-                res.status(204).send(); // 204 No Content      
-            }
+            res.status(204).send(); // 204 No Content      
         }
     }
 
@@ -76,7 +67,7 @@ module.exports.deleteUserById = (req, res, next) =>{
 // USER:3
 // get an account's info
 module.exports.readUserById = (req, res, next) =>{
-    console.log("running readUserById")
+    console.log("USER",3,"cont:readUserById")
     if(req.params.user_id == (undefined||null))
        {
            res.status(400).send("Error: invalid request params");
@@ -97,7 +88,6 @@ module.exports.readUserById = (req, res, next) =>{
                 res.status(404).json({message: "User not found"});
             break;
             default:
-                console.log("USER",3,"cont:readUserById")
                 res.status(200).send(results); // 204 No Content      
             }
         }
@@ -146,8 +136,8 @@ module.exports.dupeCheckerinator = (req, res, next) => {
 
     model.dupeCheckerinator(data, callback);
 };
-module.exports.auth = (req, res, next) =>{
-    console.log("running auth")
+module.exports.pswdAuth = (req, res, next) =>{
+    console.log("running pswdAuth")
     if(req.params.password == (undefined||null)
      ||req.params.password.trim() === ""
      ||req.params.user_id == (undefined||null)
@@ -186,5 +176,5 @@ module.exports.auth = (req, res, next) =>{
         }
     }
 
-    model.auth(data, callback);
+    model.pswdAuth(data, callback);
 };
