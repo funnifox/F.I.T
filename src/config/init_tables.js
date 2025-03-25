@@ -18,6 +18,13 @@ const SQLSTATEMENT = `
         creator_id INT,
         created_at TIMESTAMP
     );
+
+    DROP TABLE IF EXISTS workouts;
+    CREATE TABLE workouts (
+        workout_id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        token TEXT NOT NULL
+    );
 `;
 
 
