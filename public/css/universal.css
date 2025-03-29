@@ -1,0 +1,86 @@
+body {
+    background-color: var(--background-color);
+}
+
+
+.intro {
+    color: var(--primary-color-light);
+    padding: 2%;
+}
+
+.intro>main {
+    font-size: 600%;
+    font-family: sans-serif;
+    opacity: 0;
+    animation: fadeIn 2s forwards, slideFromTop 0.7s forwards;
+}
+
+.intro>sub {
+    font-size: 150%;
+    font-family: monospace;
+    color: var(--primary-color);
+    border-right: 7px solid var(--primary-color-light);
+    margin-left: 0 auto;
+    opacity: 0;
+    animation: blinking 1s infinite, fadeIn 1s 0.2s forwards;
+}
+
+@keyframes blinking {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    80% {
+        border-color: var(--primary-color-light);
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes slideFromTop {
+    0% {
+        transform: translateY(-40%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideFromLeft {
+    0% {
+        transform: translateX(-40%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.stats {
+    color: var(--primary-color-light);
+    font-family: monospace;
+    font-size: 150%;
+    padding: 2%;
+    max-height: 30vh;
+    overflow: hidden;
+    display: flex;
+}
+
+.stat {
+    margin: 0.5%;
+    padding: 1%;
+    border-radius: 0.3em;
+    width: 20%;
+    flex-wrap: wrap;
+    transform: translateX(-40%);
+    background-color: var(--accent-color);
+    animation: slideFromLeft 1s 0.3s forwards, fadeIn 2s forwards;
+}
