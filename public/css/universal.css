@@ -1,11 +1,30 @@
 body {
     background-color: var(--background-color);
+    color: var(--primary-color-light);
 }
 
+/* animations */
+@keyframes blinking {
+    from,
+    to {border-color: transparent}
+    80% {border-color: var(--primary-color-light);}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes slideFromTop {
+    0% {transform: translateY(-40%);}
+    100% {transform: translateY(0);}
+}
+@keyframes slideFromLeft {
+    0% {transform: translateX(-40%);}
+    100% {transform: translateX(0);}
+}
 
-.intro {
-    color: var(--primary-color-light);
+.intro{
     padding: 2%;
+    animation: fadeIn 3s forwards;
 }
 
 .intro>main {
@@ -17,58 +36,17 @@ body {
 
 .intro>sub {
     font-size: 150%;
-    font-family: monospace;
     color: var(--primary-color);
+    font-family: monospace;
     border-right: 7px solid var(--primary-color-light);
     margin-left: 0 auto;
     opacity: 0;
     animation: blinking 1s infinite, fadeIn 1s 0.2s forwards;
 }
 
-@keyframes blinking {
-
-    from,
-    to {
-        border-color: transparent
-    }
-
-    80% {
-        border-color: var(--primary-color-light);
-    }
-}
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes slideFromTop {
-    0% {
-        transform: translateY(-40%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-@keyframes slideFromLeft {
-    0% {
-        transform: translateX(-40%);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
 .stats {
-    color: var(--primary-color-light);
     font-family: monospace;
     font-size: 150%;
-    padding: 2%;
     max-height: 30vh;
     overflow: hidden;
     display: flex;
@@ -83,4 +61,10 @@ body {
     transform: translateX(-40%);
     background-color: var(--accent-color);
     animation: slideFromLeft 1s 0.3s forwards, fadeIn 2s forwards;
+}
+
+.moreInfo{
+    animation: fadeIn 4s forwards;
+    background-color: var(--accent-color);
+    padding: 3%;
 }
