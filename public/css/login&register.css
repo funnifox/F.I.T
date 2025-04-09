@@ -1,0 +1,48 @@
+/* responsive */
+@media only screen and (max-width: 500px) {
+    .form{
+        width: 80%;
+    }
+}
+
+/* animations */
+@keyframes blinking {
+    from,
+    to {border-color: transparent}
+    80% {border-color: var(--primary-color-light);}
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes slideFromTop {
+    0% {transform: translateY(-40%);}
+    100% {transform: translateY(0);}
+}
+
+.form{
+    animation: fadeIn 0.5s forwards;
+}
+
+.intro{
+    padding: 2%;
+    animation: fadeIn 3s forwards;
+    position: fixed;
+}
+
+.intro>main {
+    font-size: 600%;
+    font-family: sans-serif;
+    opacity: 0;
+    animation: fadeIn 2s forwards, slideFromTop 0.7s forwards;
+}
+
+.intro>sub {
+    font-size: 150%;
+    color: var(--primary-color);
+    font-family: monospace;
+    border-right: 7px solid var(--primary-color-light);
+    margin-left: 0 auto;
+    opacity: 0;
+    animation: blinking 1s infinite, fadeIn 1s 0.2s forwards;
+}

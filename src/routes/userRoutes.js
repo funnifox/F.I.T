@@ -3,9 +3,7 @@ const router = express.Router();
 
 const controller = require('../controllers/userController.js');
 
-// USER:1
-// create an account
-router.post('/', controller.theEmptyVoid, controller.dupeCheckerinator, controller.createNewUser);
+// USER:1 has been moved to useradmn
 
 // USER:2
 // delete an account

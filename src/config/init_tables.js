@@ -3,20 +3,20 @@ const pool = require("../services/db");
 const SQLSTATEMENT = `
     DROP TABLE IF EXISTS users;
     CREATE TABLE users (
-        user_id INT AUTO_INCREMENT PRIMARY KEY,
-        username TEXT NOT NULL,
-        email TEXT NOT NULL,
-        password TEXT NOT NULL,
-        group_id INT,
-        created_at TIMESTAMP
+      user_id INT AUTO_INCREMENT PRIMARY KEY,
+      username TEXT NOT NULL,
+      email TEXT NOT NULL,
+      password TEXT NOT NULL,
+      group_id INT,
+      created_at TIMESTAMP
     );
 
-    DROP TABLE IF EXISTS groups;
-    CREATE TABLE groups (
-        group_id INT AUTO_INCREMENT PRIMARY KEY,
-        groupname TEXT NOT NULL,
-        creator_id INT,
-        created_at TIMESTAMP
+    DROP TABLE IF EXISTS gatherings;
+    CREATE TABLE gatherings (
+      gathering_id INT AUTO_INCREMENT PRIMARY KEY,
+      groupname TEXT NOT NULL,
+      creator_id INT,
+      created_at TIMESTAMP
     );
 
     DROP TABLE IF EXISTS workouts;

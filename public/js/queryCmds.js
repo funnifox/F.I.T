@@ -18,15 +18,15 @@ function fetchMethod(url, callback, method, data, token) {
   if (token) {
     headers["Authorization"] = "Bearer " + token;
   }
-  if (method.toUpperCase() !== "GET" && data !== null) {
-    options.body = JSON.stringify(data);
-  }
-  
   let options = {
     method: method.toUpperCase(),
     headers: headers
   };
+  if (method.toUpperCase() !== "GET" && data !== null) {
+    options.body = JSON.stringify(data);
+  }
 
+  
   fetch(url, options)
   .then((response) => {
     switch (response.status) {
