@@ -1,3 +1,4 @@
+const bcrypt = require('../userAdmn/brcypt');
 const model = require("../models/userModel");
 module.exports.theEmptyVoid = (req, res, next) => {
     const callback = () => {
@@ -44,30 +45,94 @@ module.exports.createNewUser = (req, res, next) =>{
 
 
 // USER:2
-// delete an account
-module.exports.deleteUserById = (req, res, next) =>{
-    console.log("USER",2,"cont:deleteUserById")
+// gat user info using username
+module.exports.requireAuth = (req, res, next) =>{
+    console.log(`==================================`)
+    console.log("running requirePassword")
+    if(req.params.userInfo == (undefined||null)
+     ||req.params.userInfo.trim() === ""
+    ){
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
+
     const data = {
-        user_id: req.params.user_id
+        userInfo: req.params.userInfo,
+        username: req.params.username
+    }
+    console.log("userInfo: "+data.userInfo)
+
+    const callback_nopassword = (error, results, fields) => {
+        if (error) {
+            res.status(500).json(error);
+        } else {
+            if(res.locals.userExist == true){
+                res.status(200).send(results); 
+            }else{
+                res.status(404).send("Error: user not found"); 
+            }
+        }
+    }
+    const callback_yespassword = (error, results, fields) => {
+        if (error) {
+            res.status(500).json(error);
+        } else {
+            if(res.locals.userExist == true){
+                console.log('getting hashed password from database')
+                res.locals.dbPassword = results[0].password
+                next()
+            }else{
+                res.status(404).send("Error: user not found"); 
+            }
+        }
+    }
+
+    
+    if(data.userInfo==""){
+        console.log("requirePassword: no")
+        model.selectUserInfoById(data, callback_nopassword);
+    }else{
+        console.log("requirePassword: yes")
+        model.getUserpassword(data, callback_yespassword);
+    }
+};
+module.exports.getUserInfo = (req, res, next) =>{
+    console.log(`==================================`)
+    console.log("running getUserInfo")
+    if(req.params.userInfo == (undefined||null)
+     ||req.params.userInfo.trim() === ""
+     ||req.params.username == (undefined||null)
+     ||req.params.username.trim() === ""
+    ){
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
+
+    const data = {
+        userInfo: req.params.userInfo,
+        username: req.params.username
     }
 
     const callback = (error, results, fields) => {
         if (error) {
-            console.error("Error deleteUserById:", error);
             res.status(500).json(error);
         } else {
-            res.status(204).send(); // 204 No Content      
+            if(res.locals.userExist == true){
+                res.status(200).send(results); 
+            }else{
+                res.status(404).send("Error: user not found"); 
+            }
         }
     }
-
-    model.deleteById(data, callback);
+    
+        model.selectUserInfoById(data, callback);
 };
 
 
 // USER:3
 // get an account's info
-module.exports.readUserById = (req, res, next) =>{
-    console.log("USER",3,"cont:readUserById")
+module.exports.readUserInfoById = (req, res, next) =>{
+    console.log("USER",3,"cont:readUserInfoById")
     if(req.params.user_id == (undefined||null))
        {
            res.status(400).send("Error: invalid request params");
@@ -92,7 +157,7 @@ module.exports.readUserById = (req, res, next) =>{
             }
         }
     }
-    model.selectUserById(data, callback);
+    model.selectUserInfoById(data, callback);
 }
 
 
@@ -104,77 +169,39 @@ module.exports.readUserById = (req, res, next) =>{
 
 
 // checks
-module.exports.dupeCheckerinator = (req, res, next) => {
-    console.log(`running dupecheckinator`)
-    if(req.body.username == undefined|| req.body.username.trim() === "")
+
+// this one outputs userExist as a true or false value, does not pass any error handling
+module.exports.chkUserExist = (req, res, next) => {
+    console.log(`==================================`)
+    console.log(`running chkUserExist`)
+    if(req.params.username == undefined||req.params.username.trim() === "")
         {
             res.status(400).send("Error: username is undefined");
             return;
         }
 
     const data = {
-        username: req.body.username
+        username: req.params.username
     };
 
     const callback = (error, results) => {
         if (error) {
-            console.error("Error: dupeCheckerinator", error);
+            console.error("Error: chkUserExist", error);
             res.status(500).json(error);
             return;
         } else {
-        switch(true) {
-            case (results[0].count > 0):
-                console.log(`Error: username is taken`)
-                res.status(409).send("Error: username is taken");
-                break;
-            default:
-                console.log(`no dupes found`)
-                next();
-            }
+            console.log(`user: ${data.username}`)
+            console.log(results[0])
+            if (results[0].count >= 1){
+                res.locals.userExist = true
+            }else{
+            res.locals.userExist = false
+        }
+            console.log('userExist: '+res.locals.userExist)
+            next()
         }
     };
 
-    model.dupeCheckerinator(data, callback);
+    model.chkUserExist(data, callback);
 };
-module.exports.pswdAuth = (req, res, next) =>{
-    console.log("running pswdAuth")
-    if(req.params.password == (undefined||null)
-     ||req.params.password.trim() === ""
-     ||req.params.user_id == (undefined||null)
-    )
-    {
-        res.status(400).send("Error: invalid request params");
-        return;
-    }
 
-
-    const data = {
-        user_id: req.params.user_id,
-        password: req.params.password
-    }
-
-    const callback = (error, results, fields) => {
-        if (error) {
-            console.error("Error auth:", error);
-            res.status(500).json(error);
-        } else {
-        switch(true) {
-            case (results[0][0].count == 0):
-                res.status(404).send(`user_id not found`)
-                break;
-            case (error):
-                console.error("Error: auth", error);
-                res.status(500).json(error);
-                break;
-            case (results[1][0].count == 0):
-                res.status(404).send(`incorrect password. please try again`)
-                break;
-            default:
-                console.log("auth passed")
-                next();
-            }
-        }
-    }
-
-    model.pswdAuth(data, callback);
-};

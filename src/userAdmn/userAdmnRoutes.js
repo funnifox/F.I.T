@@ -11,7 +11,7 @@ const jwt = require('../userAdmn/jwt');
 router.post("/register",controller.theEmptyVoid, controller.checkUsernameOrEmailExist, bcrypt.hashPassword, controller.register, jwt.generateToken, jwt.sendToken);
 
 
-router.post("/login",controller.theEmptyVoid, controller.login, bcrypt.hashPassword, bcrypt.comparePassword, jwt.generateToken, jwt.sendToken);
+router.post("/login",controller.theEmptyVoid, controller.login, bcrypt.comparePassword, jwt.generateToken, jwt.sendToken);
 
 
 module.exports = router;

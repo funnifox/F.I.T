@@ -1,0 +1,56 @@
+/* animations */
+@keyframes linkhover {
+    from,
+    to {color: var(--primary-color-light);}
+    100% {color: var(--primary-color);}
+}
+
+
+
+
+.shortcuts{
+    width: 30%;
+    padding: 1%;
+    padding-left: 2%;
+    float: inline-start;
+    background-color: var(--accent-color);
+}
+
+.content{
+    width: 70%;
+    padding: 3%;
+    float: inline-end;
+}
+
+.link{
+    color: var(--primary-color-light);
+    text-decoration: none;
+}
+.link:hover{
+    animation: linkhover 0.2s ease-in forwards;
+}
+
+.param{
+    padding: 1%;
+}
+.parameters{
+    padding-left: 2%;
+}
+
+.hide{
+    display: none;
+    max-width: min-content;
+}
+
+#editProfile{
+    background-color: var(--accent-color);
+    display: none;
+    padding: 3%;
+    z-index: 10;
+    width: 30%;
+    position: fixed;
+    border-radius: 0.5em;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}

@@ -6,10 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Check if login was successful
         if (responseData.token) {
           // Store the token in local storage
-          localStorage.setItem("token", responseData.token);
-          console.log(localStorage.getItem("username"))
+          sessionStorage.setItem("token", responseData.token);
           // Redirect or perform further actions for logged-in user
-          window.location.href = `homepage.html?username=${localStorage.getItem("username")}`;
+          window.location.href = `homepage.html`;
         }
       } else {
         warningCard.classList.remove("d-none");

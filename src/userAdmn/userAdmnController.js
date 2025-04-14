@@ -15,6 +15,8 @@ module.exports.theEmptyVoid = (req, res, next) => {
 // CONTROLLER FOR LOGIN
 // ====================================================
 module.exports.login = (req, res, next) => {
+    console.log(`==================================`)
+    console.log(`running login`)
     switch(true){
         case (req.body.username == undefined|| req.body.username.trim() === ""):
             res.status(400).send("Error: username is undefined")
@@ -46,7 +48,7 @@ module.exports.login = (req, res, next) => {
                 console.log(`user found`)
                 res.locals.user_id = results[0].user_id
                 res.locals.username = req.body.username
-                res.locals.password = results[0].password
+                res.locals.dbPassword = results[0].password
 
                 next(); 
             }   

@@ -18,53 +18,34 @@ module.exports.insertSingle = (data, callback) =>{
 }
 
 
-
 // USER:2
-// delete an account
-module.exports.deleteById = (data, callback) =>{
+module.exports.selectUserInfoById = (data, callback) =>{
     const SQLSTATEMENT = `
-    DELETE FROM users
-    WHERE user_id = ?;
+    SELECT ${data.userInfo} FROM users
+    WHERE username = ?;
     `;
 
-    const VALUES = [data.user_id ];
-    console.log("USER",2,"modl:deleteById")
+    const VALUES = [data.username];
     pool.query(SQLSTATEMENT, VALUES, callback);
 } 
-
-
-// USER:3
-// get an account's info
-module.exports.selectUserById = (data, callback) =>{
+module.exports.getUserpassword = (data, callback) =>{
     const SQLSTATEMENT = `
-    SELECT username, email, group_id, created_at FROM users
-    WHERE user_id = ?;
+    SELECT password FROM users
+    WHERE username = ?;
     `;
 
-    const VALUES = [data.user_id];
-    console.log("USER",3,"modl:selectUserById")
+    const VALUES = [data.username];
     pool.query(SQLSTATEMENT, VALUES, callback);
 } 
-
 
 
 
 // checks
-module.exports.dupeCheckerinator = (data, callback)=> {
+module.exports.chkUserExist = (data, callback)=> {
     const SQLSTATEMENT = `
     SELECT COUNT(*) AS count FROM users WHERE username = ?;
     `;
 
     const VALUES = [data.username];
-    console.log(`checking for dupes`)
     pool.query(SQLSTATEMENT, VALUES, callback);
 }   
-module.exports.pswdAuth = (data, callback) =>{
-    const SQLSTATEMENT = `
-    SELECT COUNT(*) AS count FROM users WHERE user_id = ?;
-    SELECT COUNT(*) AS count FROM users WHERE user_id = ? AND password = ?;
-    `;
-
-    const VALUES = [data.user_id, data.user_id, data.password];
-    pool.query(SQLSTATEMENT, VALUES, callback);
-} 

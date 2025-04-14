@@ -3,3 +3,69 @@ body {
     color: var(--primary-color-light);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.invert{
+    filter: invert(100%);
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: none;
+}
+.form-control::placeholder {
+    color: var(--primary-color-light);
+  }
+
+/* btns */
+.btn{
+    border-radius: 0.3em;
+}
+/* primary */
+.btn1{
+    background-color: var(--accent-color);
+    color: var(--primary-color-light);
+}
+@keyframes btn1 {
+    from,
+    to {background-color: var(--accent-color);color: var(--primary-color-light);}
+    100% {background-color: var(--background-color);color: var(--primary-color);border-color: var(--accent-color);}
+}
+.btn1:hover{
+    animation: btn1 0.2s forwards ease-out;
+}
+
+/* warning */
+.btn2{
+    background-color: var(--accent-color);
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+@keyframes btn2 {
+    from,
+    to {background-color: var(--accent-color);color: var(--warning-color);border-color: var(--warning-color);}
+    100% {background-color: var(--warning-color);color: var(--accent-color);border-color: var(--accent-color);}
+}
+.btn2:hover{
+    animation: btn2 0.2s forwards ease-out;
+}
+
+/* success */
+.btn3{
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+@keyframes btn3 {
+    from,
+    to {background-color: var(--accent-color);color: var(--primary-color);border-color: var(--primary-color);}
+    100% {background-color: var(--primary-color);color: var(--accent-color);border-color: var(--accent-color);}
+}
+.btn3:hover{
+    animation: btn3 0.2s forwards ease-out;
+}

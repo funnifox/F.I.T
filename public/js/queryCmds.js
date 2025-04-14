@@ -33,9 +33,6 @@ function fetchMethod(url, callback, method, data, token) {
       case 204:
         callback(response.status, {});
         return;
-      case 401:
-        alert("401 Unauthorised: token has expired. Please login again.")
-        return;
       default:
         response.json()
         .then((responseData) => {

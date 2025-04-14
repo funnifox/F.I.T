@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
           if (responseStatus == 200) {
             // Check if signup was successful
             if (responseData.token) {
-              // Store the token in local storage
-              localStorage.setItem("token", responseData.token);
+              // Store the token in session storage
+              sessionStorage.setItem("token", responseData.token);
               // Redirect or perform further actions for logged-in user
-              window.location.href = "index.html";
+              window.location.href = "login.html";
             }
           } else {
             warningCard.classList.remove("d-none");
