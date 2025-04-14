@@ -7,12 +7,19 @@ const bcrypt = require('../userAdmn/brcypt.js');
 // USER:1 has been moved to useradmn
 
 // USER:2 get user info using username
-router.post('/:username/:userInfo', controller.theEmptyVoid, controller.chkUserExist, controller.requireAuth, bcrypt.comparePassword, controller.getUserInfo);
+let auth = [controller.chkUserExist, controller.requireAuth, bcrypt.comparePassword]
+router.post('/:username/:userInfo', auth, controller.getUserInfo);
+// (this is post bc it needs to have a req body)
 
-
+router.patch('/:username/:userInfo', auth, controller.patchUserInfo);
 
 
 module.exports = router;
+
+
+
+
+
 
 
 

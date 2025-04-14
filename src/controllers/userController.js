@@ -131,35 +131,39 @@ module.exports.getUserInfo = (req, res, next) =>{
 
 // USER:3
 // get an account's info
-module.exports.readUserInfoById = (req, res, next) =>{
-    console.log("USER",3,"cont:readUserInfoById")
-    if(req.params.user_id == (undefined||null))
-       {
-           res.status(400).send("Error: invalid request params");
-           return;
-       }
+module.exports.patchUserInfo = (req, res, next) =>{
+    console.log(`==================================`)
+    console.log("running patchUserInfo")
+    if(req.params.userInfo == (undefined||null)
+     ||req.params.userInfo.trim() === ""
+     ||req.params.username == (undefined||null)
+     ||req.params.username.trim() === ""
+    ){
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
+
     const data = {
-        user_id: req.params.user_id
+        userInfo: req.params.userInfo,
+        username: req.params.username,
+        userInfo: req.params.userInfo,
+        changed: req.body.changed
     }
 
     const callback = (error, results, fields) => {
         if (error) {
-            console.error("Error readUserById:", error);
             res.status(500).json(error);
         } else {
-        switch(true) {
-            case (results.affectedRows == 0):
-                console.log(`Error: user not found`)
-                res.status(404).json({message: "User not found"});
-            break;
-            default:
-                res.status(200).send(results); // 204 No Content      
+            if(res.locals.userExist == true){
+                res.status(200).send(results); 
+            }else{
+                res.status(404).send("Error: user not found"); 
             }
         }
     }
-    model.selectUserInfoById(data, callback);
-}
-
+    
+        model.patchUserInfo(data, callback);
+};
 
 
 

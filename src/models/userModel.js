@@ -39,6 +39,18 @@ module.exports.getUserpassword = (data, callback) =>{
 } 
 
 
+// USER:3
+module.exports.patchUserInfo = (data, callback) =>{
+    const SQLSTATEMENT = `
+    UPDATE users
+    SET ${data.userInfo} = '${data.changed}'
+    WHERE username = ?;
+    `;
+
+    const VALUES = [data.username];
+    pool.query(SQLSTATEMENT, VALUES, callback);
+} 
+
 
 // checks
 module.exports.chkUserExist = (data, callback)=> {
