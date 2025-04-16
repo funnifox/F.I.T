@@ -1,3 +1,53 @@
+document.addEventListener("DOMContentLoaded", function () {
+// spawn desc
+  const callback1 = (responseStatus, responseData) => {
+    console.log("responseStatus:", responseStatus);
+    document.getElementById("description").innerHTML = responseData[0].description;
+  };
+
+  fetchMethod(currentUrl + `/api/users/${localStorage.getItem('username')}/desc`, callback1, "GET", null);
+
+
+
+
+
+  // save desc
+  const textarea = document.getElementById("description");
+    const button = document.getElementById("descBtn");
+
+    textarea.addEventListener("input", function () {
+        // Enable the button if textarea is not empty
+        if (textarea.value.trim() !== "") {
+            button.removeAttribute("disabled");
+        } else {
+            button.setAttribute("disabled", "true");
+        }
+    });
+
+  const callback2 = (responseStatus, responseData) => {
+    console.log("responseStatus:", responseStatus);
+  };
+
+  const desc = document.getElementById("desc");
+  desc.onsubmit = function (event) {
+    event.preventDefault();
+    const description = document.getElementById("description").value;
+
+    const data = {
+      description: description
+    };
+
+    fetchMethod(currentUrl + `/api/users/${localStorage.getItem('username')}`, callback2, "PATCH", data);
+  };
+});
+
+
+
+
+
+
+
+
 function editProfile_open(i, origin) {
   let validIds = ['password', 'email', 'username'];
   if (validIds.includes(i)) {
@@ -165,7 +215,6 @@ function chkAllowRename(event, i) {
 
     if (responseStatus === 200) {
       warningCard.classList.add("d-none");
-      editProfile_close();
       patchUserInfo(i);
     } else {
       warningCard.classList.remove("d-none");
@@ -174,4 +223,23 @@ function chkAllowRename(event, i) {
   };
 
   fetchMethod(`${currentUrl}/api/users/${username}`, callback, "GET", null);
+}
+
+function desc(){
+  const callback = (responseStatus, responseData) => {
+    console.log("responseStatus:", responseStatus);
+  };
+
+  const desc = document.getElementById("desc");
+  desc.onsubmit = function (event) {
+    event.preventDefault();
+    const description = document.getElementById("description").value;
+
+    const data = {
+      description: description
+    };
+
+    fetchMethod(currentUrl + `/api/users/${localStorage.getItem('username')}`, callback, "PATCH", data);
+    editProfile.reset();
+  };
 }

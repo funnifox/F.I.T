@@ -5,6 +5,7 @@ const SQLSTATEMENT = `
     CREATE TABLE users (
       user_id INT AUTO_INCREMENT PRIMARY KEY,
       username TEXT NOT NULL,
+      description TEXT,
       email TEXT NOT NULL,
       password TEXT NOT NULL,
       group_id INT,

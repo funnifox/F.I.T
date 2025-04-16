@@ -52,6 +52,30 @@ module.exports.patchUserInfo = (data, callback) =>{
 } 
 
 
+// USER:5
+module.exports.description = (data, callback) =>{
+    const SQLSTATEMENT = `
+    UPDATE users
+    SET description = ?
+    WHERE username = ?;
+    `;
+
+    const VALUES = [data.description, data.username];
+    pool.query(SQLSTATEMENT, VALUES, callback);
+} 
+
+// USER:6
+module.exports.getDesc = (data, callback) =>{
+    const SQLSTATEMENT = `
+    SELECT description FROM users
+    WHERE username = ?;
+    `;
+
+    const VALUES = [data.username];
+    pool.query(SQLSTATEMENT, VALUES, callback);
+} 
+
+
 // checks
 module.exports.chkUserExist = (data, callback)=> {
     const SQLSTATEMENT = `

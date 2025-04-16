@@ -17,6 +17,12 @@ router.patch('/:username/:userInfo',controller.theEmptyVoid, auth, controller.pa
 // USER:4 check user existence
 router.get('/:username',controller.theEmptyVoid, controller.chkUserExist, controller.allowRename);
 
+// USER:5 edit user description
+router.patch('/:username',controller.theEmptyVoid, controller.chkUserExist, controller.description);
+
+// USER:6 get user description
+router.get('/:username/desc',controller.theEmptyVoid, controller.chkUserExist, controller.getDesc);
+
 module.exports = router;
 
 
@@ -30,5 +36,5 @@ module.exports = router;
 // TODO LIST
 // - add profile pic option (another midlware???) bknd
 // - add profile pic frntnd
-// - add user desc. bknd
-// - add user desc. frntnd
+// - add user description. bknd
+// - add user description. frntnd

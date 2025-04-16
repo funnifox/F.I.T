@@ -41,12 +41,22 @@
             <h1>PROFILE</h1>
             <hr>
             <br><br>
-            <a class="">
-                <img src="images/defaultpfp.png" alt="pfp" style="height: 40vh;width: 40vh;border-radius: 0.5em;"> 
-            </a><br><br>
+            <div class="accDetails d-flex gap-4">
+                <a class="">
+                    <img src="images/defaultpfp.png" alt="pfp" style="height: 40vh;width: 40vh;border-radius: 0.5em;"> 
+                </a>
+                <div>
+                    <h1><text class="username me-1">username</text></h1><br>
+                    <form id="desc">
+                        <textarea class="form-control text-white border-0" style="background-color: var(--accent-color);" rows="4" cols="40" id="description" name="text"></textarea>
+                        <br><button class="btn btn3 me-1" id="descBtn" type="btn" disabled>save</button>
+                    </form>
+            </div>
+            </div>
+            <br><br>
 
             <div class="param">
-                <button class="btn btn1 me-1" disabled>Username:  <text id="username" class="me-1">username</text></button>
+                <button class="btn btn1 me-1" disabled>Username:  <text id="username" class="me-1 username">username</text></button>
                 <a class="btn btn1" type="btn" onclick="editProfile_open('username')">change</a>
             </div>
             <div class="param">

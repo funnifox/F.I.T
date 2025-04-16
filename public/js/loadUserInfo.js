@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log(localStorage)
-    document.getElementById("username").innerHTML = localStorage.getItem("username");
-});
+    const usernameElements = document.querySelectorAll(".username");
+    const storedUsername = localStorage.getItem("username");
 
+    usernameElements.forEach(i => {
+        i.innerHTML = storedUsername;
+    });
+});

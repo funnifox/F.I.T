@@ -187,7 +187,67 @@ module.exports.allowRename = (req, res, next) =>{
 };
 
 
+// USER:5
+// patch description
+module.exports.description = (req, res, next) =>{
+    console.log(`\n========================================`)
+    console.log("-- running description")
+    if(!req.params.username||req.params.username.trim() === ""){
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
 
+    const data = {
+        username: req.params.username,
+        description: req.body.description
+    }
+    
+    const callback = (error, results, fields) => {
+        if (error) {
+            res.status(500).json(error);
+        } else {
+            if(res.locals.userExist == true){
+                console.log(`save successful`)
+                res.status(200).send(results); 
+            }else{
+                res.status(404).send("Error: user not found"); 
+            }
+        }
+    }
+    
+    model.description(data, callback);
+};
+
+// USER:5
+// patch description
+module.exports.getDesc = (req, res, next) =>{
+    console.log(`\n========================================`)
+    console.log("-- running getDesc")
+    if(!req.params.username||req.params.username.trim() === ""){
+        res.status(400).send("Error: invalid request params");
+        return;
+    }
+
+    const data = {
+        username: req.params.username
+    }
+    
+    const callback = (error, results, fields) => {
+        if (error) {
+            res.status(500).json(error);
+        } else {
+            if(res.locals.userExist == true){
+                console.log(`successful`)
+                console.log(results)
+                res.status(200).send(results); 
+            }else{
+                res.status(404).send("Error: user not found"); 
+            }
+        }
+    }
+    
+    model.getDesc(data, callback);
+};
 
 
 
