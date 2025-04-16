@@ -50,46 +50,52 @@
                 <a class="btn btn1" type="btn" onclick="editProfile_open('username')">change</a>
             </div>
             <div class="param">
-                <button class="btn btn1 me-1" disabled>Email:  <text id="email" class="me-1">#############</text></button>
-                <a class="btn btn3 me-1" type="btn" onclick="show('email')" id="showemail">show</a>
-                <a class="btn btn2 hide me-1" type="btn" onclick="hide('email')" id="hideemail">hide</a>
+                <button class="btn btn1 me-1" disabled>Email:  <text id="text-email" class="me-1">########</text></button>
+                <a class="btn btn3 me-1" type="btn" onclick="show('email')" id="show-email">show</a>
+                <a class="btn btn2 hide me-1" type="btn" onclick="hide('email')" id="hide-email">hide</a>
                 <a class="btn btn1 me-1" type="btn" onclick="editProfile_open('email')">change</a>
             </div>
             <div class="param">
-                <button class="btn btn1 me-1 show" disabled>Password:  <text id="password" class="me-1">########</text></button>
-                <a class="btn btn3 me-1" type="btn" onclick="show('password')" id="showpassword">show</a>
-                <a class="btn btn2 hide me-1" type="btn" onclick="hide('password')" id="hidepassword">hide</a>
+                <button class="btn btn1 me-1 show" disabled>Password:  <text id="text-password" class="me-1">########</text></button>
+                <a class="btn btn3 me-1" type="btn" onclick="show('password')" id="show-password">show</a>
+                <a class="btn btn2 hide me-1" type="btn" onclick="hide('password')" id="hide-password">hide</a>
                 <a class="btn btn1 me-1" type="btn" onclick="editProfile_open('password')">change</a>
             </div>
 
-            <form id="editProfile">
-                <div class="mb-3" id="usernameParam" style="display: none;">
-                    <h3>Enter new Username</h3><br>
-                    <input id="username" type="text" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter username">
-                    <br><button type="submit" class="btn w-100 btn2" style="background-color: var(--background-color);">Submit</button>
-            </div>
-                <div class="mb-3" id="emailParam" style="display: none;">
-                    <h3>Enter new Email</h3><br>
-                    <input id="inputEmail" type="text" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter email">
-                    <br><button type="submit" class="btn w-100 btn2" style="background-color: var(--background-color);">Submit</button>
-            </div>
-                <div class="mb-3" id="passwordParam" style="display: none;">
-                    <h3>Enter new Password</h3><br>
-                    <input type="text" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter password"><br>
-                    <input id="password" type="text" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Comfirm password">
-                    <br><button type="submit" class="btn w-100 btn2" style="background-color: var(--background-color);">Submit</button>
-            </div>
-                <div class="mb-3" id="passwordChk" style="display: none;">
-                    <h3>Is it really you?</h3><br>
-                    <input type="password" id="passwordChkImput" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter password"><br>
-                    <br><button type="submit" class="btn w-100 btn2" style="background-color: var(--background-color);">Submit</button>
-            </div>
 
-            <div id="warningCard" class="card border-danger mt-3 mb-3 d-none">
-                <div class="card-body text-danger">
-                  <p id="warningText" class="card-text"></p>
+            <form id="editProfile">
+                <div class="mb-3" id="section-username" style="display: none;">
+                    <h2>Enter new Username</h2><br><input id="input-username" type="text" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter username">
+                    <br><br><button class="btn w-100 btn1" onclick="chkAllowRename(event, 'username');" style="background-color: var(--background-color);">Next</button>
+                </div>
+            
+                <div class="mb-3" id="section-email" style="display: none;">
+                    <h3>Enter new Email</h3><br><input id="input-email" type="email" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter email">
+                    <br><br><a class="btn w-100 btn1" onclick="patchUserInfo('email', 'email')" style="background-color: var(--background-color);">Next</a>
+                </div>
+            
+                <div class="mb-3" id="section-password" style="display: none;">
+                    <h2>Enter new Password</h2><br><input id="input-password" type="password" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter password">
+                    <br><input id="input-confirm-password" type="password" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Confirm password">
+                    <br><br><a class="btn w-100 btn1" onclick="patchUserInfo('password', 'password')" style="background-color: var(--background-color);">Next</a>
+                </div>
+            
+                <div class="mb-3" id="section-passwordChk" style="display: none;">
+                    <h3 id="back-username" style="display: none;" onclick="editProfile_close();editProfile_open('username')">↩</h3>
+                    <h3 id="back-email" style="display: none;" onclick="editProfile_close();editProfile_open('email')">↩</h3>
+                    <h3 id="back-password" style="display: none;" onclick="editProfile_close();editProfile_open('password')">↩</h3>
+                    <h2>Is it really you?</h2>
+                    <br><input type="password" id="input-passwordChk" class="form-control text-light border-0" style="background-color: var(--background-color);" placeholder="Enter password">
+                    <br><br><button type="submit" class="btn w-100 btn2" style="background-color: var(--background-color);">Submit</button>
+                </div>
+            
+                <div id="warningCard" class="card border-danger mt-3 mb-3 d-none">
+                    <div class="card-body text-danger">
+                        <p id="warningText" class="card-text"></p>
+                    </div>
                 </div>
             </form>
+            
         </div>
     </div>
 
@@ -103,7 +109,6 @@
     <script src="js/queryCmds.js" type="text/javascript"></script>
     <script src="js/getCurrentURL.js" type="text/javascript"></script>
     <script src="js/loadUserInfo.js" type="text/javascript"></script>
-    <script src="js/getUserInfo.js" type="text/javascript"></script>
     <script src="js/editProfile.js" type="text/javascript"></script>
 </body>
 </html>

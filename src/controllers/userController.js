@@ -47,8 +47,8 @@ module.exports.createNewUser = (req, res, next) =>{
 // USER:2
 // gat user info using username
 module.exports.requireAuth = (req, res, next) =>{
-    console.log(`==================================`)
-    console.log("running requirePassword")
+    console.log(`\n========================================`)
+    console.log("-- running requirePassword")
     if(req.params.userInfo == (undefined||null)
      ||req.params.userInfo.trim() === ""
     ){
@@ -97,8 +97,8 @@ module.exports.requireAuth = (req, res, next) =>{
     }
 };
 module.exports.getUserInfo = (req, res, next) =>{
-    console.log(`==================================`)
-    console.log("running getUserInfo")
+    console.log(`\n========================================`)
+    console.log("-- running getUserInfo")
     if(req.params.userInfo == (undefined||null)
      ||req.params.userInfo.trim() === ""
      ||req.params.username == (undefined||null)
@@ -130,15 +130,11 @@ module.exports.getUserInfo = (req, res, next) =>{
 
 
 // USER:3
-// get an account's info
+// patch an account's info
 module.exports.patchUserInfo = (req, res, next) =>{
-    console.log(`==================================`)
-    console.log("running patchUserInfo")
-    if(req.params.userInfo == (undefined||null)
-     ||req.params.userInfo.trim() === ""
-     ||req.params.username == (undefined||null)
-     ||req.params.username.trim() === ""
-    ){
+    console.log(`\n========================================`)
+    console.log("-- running patchUserInfo")
+    if(!req.params.userInfo||req.params.userInfo.trim() === ""||!req.params.username||req.params.username.trim() === ""){
         res.status(400).send("Error: invalid request params");
         return;
     }
@@ -146,15 +142,15 @@ module.exports.patchUserInfo = (req, res, next) =>{
     const data = {
         userInfo: req.params.userInfo,
         username: req.params.username,
-        userInfo: req.params.userInfo,
         changed: req.body.changed
     }
-
+    
     const callback = (error, results, fields) => {
         if (error) {
             res.status(500).json(error);
         } else {
             if(res.locals.userExist == true){
+                console.log(`successful`)
                 res.status(200).send(results); 
             }else{
                 res.status(404).send("Error: user not found"); 
@@ -162,10 +158,33 @@ module.exports.patchUserInfo = (req, res, next) =>{
         }
     }
     
+    if (data.userInfo == 'password'){
+        if (res.locals.hashed == true && res.locals.hash){
+            data.changed = res.locals.hash
+            model.patchUserInfo(data, callback);
+        }else{
+            res.locals.hashed = true
+            req.body.password = data.changed
+            console.log('go to hasher')
+            next()
+        }
+    }else{
         model.patchUserInfo(data, callback);
+    }
 };
 
-
+// USER:4
+// allow rename
+module.exports.allowRename = (req, res, next) =>{
+    console.log(`\n========================================`)
+    console.log("-- running allowRename")
+    console.log(`userExist: `+res.locals.userExist)
+    if (res.locals.userExist == true){ 
+        res.status(409).send({message:"Username taken"});
+    }else{
+        res.status(200).send();
+    }
+};
 
 
 
@@ -176,11 +195,11 @@ module.exports.patchUserInfo = (req, res, next) =>{
 
 // this one outputs userExist as a true or false value, does not pass any error handling
 module.exports.chkUserExist = (req, res, next) => {
-    console.log(`==================================`)
-    console.log(`running chkUserExist`)
-    if(req.params.username == undefined||req.params.username.trim() === "")
+    console.log(`\n========================================`)
+    console.log(`-- running chkUserExist`)
+    if((req.params.username == undefined)||(req.params.username.trim() === ""))
         {
-            res.status(400).send("Error: username is undefined");
+            res.status(400).json({message:"username cannot be empty"});
             return;
         }
 

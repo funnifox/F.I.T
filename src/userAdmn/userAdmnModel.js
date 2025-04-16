@@ -1,9 +1,9 @@
 const pool = require('../services/db');
 
 
-// ===================================================
+// \n=========================================================
 // SELECT ALL PLAYERS BY USER
-// ===================================================
+// \n=========================================================
 module.exports.selectAll = (callback) =>
 {
     const SQLSTATEMENT = `
@@ -12,9 +12,9 @@ module.exports.selectAll = (callback) =>
     pool.query(SQLSTATEMENT, callback);
 }
 
-// ===================================================
+// \n=========================================================
 // SELECT USER BY USERNAME
-// ===================================================
+// \n=========================================================
 module.exports.checkUsernameExist = (data, callback) =>
 {
     const SQLSTATEMENT = `
@@ -28,9 +28,9 @@ module.exports.checkUsernameExist = (data, callback) =>
 }
     
 
-// ===================================================
+// \n=========================================================
 // SELECT USER BY USERNAME OR EMAIL
-// ===================================================
+// \n=========================================================
 module.exports.checkUsernameOrEmailExist = (data, callback) =>
 {
     const SQLSTATEMENT = `
@@ -42,9 +42,9 @@ module.exports.checkUsernameOrEmailExist = (data, callback) =>
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
-// ===================================================
+// \n=========================================================
 // INSERT NEW USER (USERNAME, EMAIL)
-// ===================================================
+// \n=========================================================
 module.exports.insertNewUser = (data, callback) =>
 {
     const SQLSTATEMENT = `

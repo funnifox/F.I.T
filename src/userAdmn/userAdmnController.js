@@ -11,12 +11,12 @@ module.exports.theEmptyVoid = (req, res, next) => {
 
 
 
-// ====================================================
+// \n==========================================================
 // CONTROLLER FOR LOGIN
-// ====================================================
+// \n==========================================================
 module.exports.login = (req, res, next) => {
-    console.log(`==================================`)
-    console.log(`running login`)
+    console.log(`\n========================================`)
+    console.log(`-- running login`)
     switch(true){
         case (req.body.username == undefined|| req.body.username.trim() === ""):
             res.status(400).send("Error: username is undefined")
@@ -61,9 +61,9 @@ module.exports.login = (req, res, next) => {
 
 
 
-// ====================================================
+// \n==========================================================
 // CONTROLLER FOR REGISTER
-// ====================================================
+// \n==========================================================
 module.exports.register = (req, res, next) => {
     switch(true){
         case (req.body.username == undefined|| req.body.username.trim() === ""):
@@ -101,9 +101,9 @@ module.exports.register = (req, res, next) => {
 
 
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FOR CHECK IF USERNAME OR EMAIL EXISTS
-// ====================================================
+// \n==========================================================
 module.exports.checkUsernameOrEmailExist = (req, res, next) => {
     const data = {
         username: req.body.username,
@@ -135,25 +135,25 @@ module.exports.checkUsernameOrEmailExist = (req, res, next) => {
 
 
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR TOKEN PRE-GENERATION
-// ====================================================
+// \n==========================================================
 module.exports.preTokenGenerate = (req, res, next) => {
     res.locals.user_id = req.body.id;
     next();
 }
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR BEFORE SENDING TOKEN
-// ====================================================
+// \n==========================================================
 module.exports.beforeSendToken = (req, res, next) => {
     res.locals.message = `Token is generated.`;
     next();
 }
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR TOKEN VERIFICATION
-// ====================================================
+// \n==========================================================
 module.exports.showTokenVerified = (req, res, next) => {
     res.status(200).json({
         user_id: res.locals.user_id,
@@ -161,26 +161,26 @@ module.exports.showTokenVerified = (req, res, next) => {
     });
 }
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR BCRYPT COMPARE
-// ====================================================
+// \n==========================================================
 module.exports.showCompareSuccess = (req, res, next) => {
     res.status(200).json({
         message: "Compare is successful."
     });
 }
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR BCRYPT PRE-COMPARE
-// ====================================================
+// \n==========================================================
 module.exports.preCompare = (req, res, next) => {
     res.locals.hash = req.body.hash;
     next();
 }
 
-// ====================================================
+// \n==========================================================
 // EXAMPLE CONTROLLER FOR BCRYPT HASHING
-// ====================================================
+// \n==========================================================
 module.exports.showHashing = (req, res, next) => {
     res.status(200).json({
         hash: res.locals.hash,

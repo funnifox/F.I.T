@@ -88,7 +88,7 @@ module.exports.deleteGrpById = (req, res, next) =>{
 // USER:3
 // get an account's info
 module.exports.readUserById = (req, res, next) =>{
-    console.log("running readUserById")
+    console.log("-- running readUserById")
     if(req.params.user_id == (undefined||null))
        {
            res.status(400).send("Error: invalid request params");
@@ -127,7 +127,7 @@ module.exports.readUserById = (req, res, next) =>{
 
 // checks
 module.exports.dupeCheckerinator = (req, res, next) => {
-    console.log(`running dupecheckinator [group edition]`)
+    console.log(`-- running dupecheckinator [group edition]`)
     if(req.body.groupname == undefined|| req.body.groupname.trim() === "")
         {
             res.status(400).send("Error: groupname is undefined");
@@ -159,7 +159,7 @@ module.exports.dupeCheckerinator = (req, res, next) => {
     model.dupeCheckerinator(data, callback);
 };
 module.exports.chkUserExist = (req, res, next) => {
-    console.log(`running chkUserExist`)
+    console.log(`-- running chkUserExist`)
     if(req.params.user_id == (undefined||null))
         {
             res.status(400).send("Error: user_id parameter missing");
@@ -191,7 +191,7 @@ module.exports.chkUserExist = (req, res, next) => {
     model.chkUserExist(data, callback);
 };
 module.exports.groupDelAuth = (req, res, next) => {
-    console.log(`running groupDelAuth`)
+    console.log(`-- running groupDelAuth`)
     if(req.params.groupname == undefined|| 
        req.params.groupname.trim() === ""||
        req.params.user_id == undefined)

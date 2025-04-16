@@ -1,16 +1,16 @@
 const bcrypt = require("bcrypt");
 
-// ====================================================
+// \n==========================================================
 // SET SALT ROUNDS
-// ====================================================
+// \n==========================================================
 const saltRounds = 10;
 
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FUNCTION FOR HASHING PASSWORD
-// ====================================================
+// \n==========================================================
 module.exports.hashPassword = (req, res, next) => {
-    console.log(`==================================`)
+    console.log(`\n========================================`)
     console.log(`runnung hashPassword`)
     const callback = (err, hash) => {
         if (err) {
@@ -27,13 +27,13 @@ module.exports.hashPassword = (req, res, next) => {
 };
 
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FUNCTION FOR COMPARING PASSWORD
-// ====================================================
+// \n==========================================================
 module.exports.comparePassword = (req, res, next) => {
     // Check password
-    console.log(`==================================`)
-    console.log(`running comparePassword`)
+    console.log(`\n========================================`)
+    console.log(`-- running comparePassword`)
     const callback = (err, isMatch) => {
         if (err) {
         console.error("Error bcrypt:", err);

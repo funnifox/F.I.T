@@ -1,16 +1,16 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-// ====================================================
+// \n==========================================================
 // SET JWT CONFIGURATION
-// ====================================================
+// \n==========================================================
 const secretKey = process.env.JWT_SECRET_KEY;
 const tokenDuration = process.env.JWT_EXPIRES_IN;
 const tokenAlgorithm = process.env.JWT_ALGORITHM;
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FUNCTION FOR GENERATING JWT TOKEN
-// ====================================================
+// \n==========================================================
 module.exports.generateToken = (req, res, next) => {
     console.log(`generateToken jwt`)
 
@@ -37,9 +37,9 @@ module.exports.generateToken = (req, res, next) => {
     const token = jwt.sign(payload, secretKey, options, callback);
 };
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FUNCTION FOR SENDING JWT TOKEN
-// ====================================================
+// \n==========================================================
 module.exports.sendToken = (req, res, next) => {
     res.status(200).json({
         message: res.locals.message,
@@ -47,9 +47,9 @@ module.exports.sendToken = (req, res, next) => {
     });
 };
 
-// ====================================================
+// \n==========================================================
 // MIDDLEWARE FUNCTION FOR VERIFYING JWT TOKEN
-// ====================================================
+// \n==========================================================
 module.exports.verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
   
