@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
     signupForm.addEventListener("submit", function (event) {
       event.preventDefault();
   
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const username = document.getElementById("input-username").value;
+      const email = document.getElementById("input-email").value;
+      const password = document.getElementById("input-password").value;
       const confirmPassword = document.getElementById("confirmPassword").value;
   
       // Perform signup logic
@@ -55,3 +55,63 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+
+
+
+
+
+
+
+
+
+
+
+  function chkAllowRename(event, i) {
+    event.preventDefault(); 
+  
+    const warningCard = document.getElementById("warningCard");
+    const warningText = document.getElementById("warningText");
+    const username = document.getElementById("input-username").value;
+    const input = document.getElementById(`input-${i}`);
+    if (!input.checkValidity()) {
+      input.reportValidity(); 
+      return;
+    }
+    const callback = (responseStatus, responseData) => {
+      console.log("responseStatus:", responseStatus);
+  
+      if (responseStatus === 200) {
+        warningCard.classList.add("d-none");
+        register_open('username','email')
+      } else {
+        warningCard.classList.remove("d-none");
+        warningText.innerText = responseData.message;
+      }
+    };
+  
+    fetchMethod(`${currentUrl}/api/users/${username}`, callback, "GET", null);
+  }
+
+
+  function register_open(prev,i) {
+    warningCard.classList.add("d-none");
+    const input = document.getElementById(`input-${prev}`);
+    if (!input.checkValidity()) {
+      input.reportValidity(); 
+      return;
+    }else{
+        document.getElementById(`display-${prev}`).innerHTML = input.value;
+        let validIds = ['password', 'email', 'username','confirm'];
+      if (validIds.includes(i)) {
+        register_close()
+        document.getElementById(`section-${i}`).style.display = "block";
+      }
+    }
+  }
+  
+  function register_close() {
+    document.getElementById("section-password").style.display = "none";
+    document.getElementById("section-email").style.display = "none";
+    document.getElementById("section-username").style.display = "none";
+  }

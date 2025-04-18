@@ -34,43 +34,58 @@
 </head>
 
 
-<body>
-  <div class="intro">
-    <main>F.I.T.</main>
-    <sub>Fitness Integration Terminal</sub>
-</div>
+<body class="d-flex align-items-center justify-content-center vh-100">
+  <div class="container p-5">
+    <div class="row justify-content-center">
+      <div class="form col-md-5 p-4" style="background-color: var(--accent-color); border-radius: 0.5em;">
+          <br>
+        <p class="h1 text-center text-light">Register</p>
+        <p class="h6 text-center"><a href="login.html">Back to login page</a></p>
+        <br>
+            <form id="signupForm">
+              <div id="section-username">
+                <p class="h6 text-light">Username</p>
+                <input type="text" class="form-control border-0 text-light" id="input-username" style="background-color: var(--background-color);" required>
+                <br><br>
+                <div class="text text-center">
+                  <button type="button" class="btn btn1 w-50" onclick="chkAllowRename(event, 'username');" style="background-color: var(--background-color);">Next</button>
+                </div>
+              </div>
 
 
-
-  <div class="container py-4">
-    <div class="row justify-content-end">
-      <div class="form col-md-5 px-4">
-          <br><br>
-        <p class="h1 text-center text-light">Register</p><br>
-        <form id="signupForm">
-              <p class="h6 text-light">Username</p>
-              <input type="text" class="form-control border-0 text-light" id="username" style="background-color: var(--accent-color);" required>
-            <br>
+              <div id="section-email" style="display: none;">
+                <p class="h6 text-light">Email</p>
+                <input type="email" class="form-control border-0 text-light" id="input-email" style="background-color: var(--background-color);" required>
+                <br><br>
+                <div class="text text-center">
+                  <button type="button" class="btn btn1 w-50" onclick="register_open('email','password');" style="background-color: var(--background-color);">Next</button>
+                </div>
+              </div>
 
 
-              <p class="h6 text-light">Email</p>
-              <input type="email" class="form-control border-0 text-light" id="email" style="background-color: var(--accent-color);" required>
-            <br>
+              <div id="section-password" style="display: none;">
+                <p class="h6 text-light">Password</p>
+                <input type="password" class="form-control border-0 text-light" id="input-password" style="background-color: var(--background-color);" required>
+                <br>
+                <p class="h6 text-light">Confirm Password</p>
+                <input type="password" class="form-control border-0 text-light" id="confirmPassword" style="background-color: var(--background-color);" required>
+                <br><br>
+                <div class="text text-center">
+                  <button type="button" class="btn btn1 w-50" onclick="register_open('password','confirm');" style="background-color: var(--background-color);">Next</button>
+                </div>
+          </div>
+            
+            <div id="section-confirm" style="display: none;">
+              <div class="text-center">
+                <button class="btn" disabled>Username: <text id="display-username">username</text></button><br><br>
+                <button class="btn" disabled>Email: <text id="display-email">email</text></button><br><br>
+                <button class="btn" disabled>Password: <text id="display-password">password</text></button><br><br>      
+              </div>
 
-
-              <p class="h6 text-light">Password</p>
-              <input type="password" class="form-control border-0 text-light" id="password" style="background-color: var(--accent-color);" required>
-            <br>
-
-
-              <p class="h6 text-light">Confirm Password</p>
-              <input type="password" class="form-control border-0 text-light" id="confirmPassword" style="background-color: var(--accent-color);" required>
-            <br>
-
-
-            <button type="submit" class="btn btn-dark" style="background-color: var(--accent-color);color: var(--primary-color-light);">Signup</button>
-            <br><br>
-            <p class="h6"><a href="login.html">Back to login page</a></p>
+              <text>Are these details correct?</text>
+              <button type="submit" class="btn btn3 w-100">Yes</button>
+              <br><br>
+            </div>
             <br>
 
           </form>
@@ -80,6 +95,7 @@
             </div>
           </div>
       </div>
+  </div>
   </div>
 
 

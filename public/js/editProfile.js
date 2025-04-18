@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const callback2 = (responseStatus, responseData) => {
     console.log("responseStatus:", responseStatus);
+    location.reload()
   };
 
   const desc = document.getElementById("desc");
@@ -48,15 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-function editProfile_open(i, origin) {
+function editProfile_open(i) {
   let validIds = ['password', 'email', 'username'];
   if (validIds.includes(i)) {
     document.getElementById(`section-${i}`).style.display = "block";
     document.getElementById(`back-${i}`).style.display = "block";
   } else if (i === 'passwordChk') {
     document.getElementById(`section-${i}`).style.display = "block";
-    if (origin && validIds.includes(origin)) {
-      document.getElementById(`back-${origin}`).style.display = "block";
+    if (i && validIds.includes(i)) {
+      document.getElementById(`back-${i}`).style.display = "block";
     }
   }
 
