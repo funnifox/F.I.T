@@ -10,7 +10,7 @@
 
 .shortcuts{
     width: 30%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 1%;
     padding-left: 2%;
     float: inline-start;
@@ -21,7 +21,13 @@
     width: 70%;
     padding: 3%;
     float: inline-end;
+    height: 100vh;
+    overflow: auto;
+    scrollbar-width: none;
 }
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
 .link{
     color: var(--primary-color-light);

@@ -107,7 +107,6 @@ module.exports.register = (req, res, next) => {
 module.exports.checkUsernameOrEmailExist = (req, res, next) => {
     const data = {
         username: req.body.username,
-        email: req.body.email,
         password: req.body.password
     }
 
@@ -118,7 +117,7 @@ module.exports.checkUsernameOrEmailExist = (req, res, next) => {
         } else {
             console.log(`Checking for dupes\n`, results)
             if (results[0].count > 0) {
-                res.status(409).json({message:`Username or email already exists`});
+                res.status(409).json({message:`Username already exists`});
             } else {
                 console.log(`no dupes found`)
                 next(); 

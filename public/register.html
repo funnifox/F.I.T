@@ -35,20 +35,24 @@
 
 
 <body class="d-flex align-items-center justify-content-center vh-100">
-  <div class="container p-5">
-    <div class="row justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center p-5">
       <div class="form col-md-5 p-4" style="background-color: var(--accent-color); border-radius: 0.5em;">
-          <br>
+        <br>
         <p class="h1 text-center text-light">Register</p>
         <p class="h6 text-center"><a href="login.html">Back to login page</a></p>
-        <br>
             <form id="signupForm">
+              <br>
               <div id="section-username">
                 <p class="h6 text-light">Username</p>
                 <input type="text" class="form-control border-0 text-light" id="input-username" style="background-color: var(--background-color);" required>
                 <br><br>
                 <div class="text text-center">
                   <button type="button" class="btn btn1 w-50" onclick="chkAllowRename(event, 'username');" style="background-color: var(--background-color);">Next</button>
+                  <br>
+                  <br>
+                  <br>
+                  <h6>◇ ◇ ◇</h6>
                 </div>
               </div>
 
@@ -59,6 +63,10 @@
                 <br><br>
                 <div class="text text-center">
                   <button type="button" class="btn btn1 w-50" onclick="register_open('email','password');" style="background-color: var(--background-color);">Next</button>
+                  <br>
+                  <br>
+                  <br>
+                  <h6>◈ ◇ ◇</h6>
                 </div>
               </div>
 
@@ -72,6 +80,10 @@
                 <br><br>
                 <div class="text text-center">
                   <button type="button" class="btn btn1 w-50" onclick="register_open('password','confirm');" style="background-color: var(--background-color);">Next</button>
+                  <br>
+                  <br>
+                  <br>
+                  <h6>◈ ◈ ◇</h6>
                 </div>
           </div>
             
@@ -84,9 +96,13 @@
 
               <text>Are these details correct?</text>
               <button type="submit" class="btn btn3 w-100">Yes</button>
-              <br><br>
+              <div class="text-center">
+                <br>
+                <br>
+                <br>
+                <h6>◈ ◈ ◈</h6>
+              </div>
             </div>
-            <br>
 
           </form>
           <div id="warningCard" class="card border-danger mb-3 d-none">

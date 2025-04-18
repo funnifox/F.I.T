@@ -35,10 +35,10 @@ module.exports.checkUsernameOrEmailExist = (data, callback) =>
 {
     const SQLSTATEMENT = `
         SELECT COUNT(*) AS count FROM users
-        WHERE username = ? OR email = ?;
+        WHERE username = ?
     `;
 
-    const VALUES = [data.username, data.email]
+    const VALUES = [data.username]
     pool.query(SQLSTATEMENT, VALUES, callback);
 }
 
